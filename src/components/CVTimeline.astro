@@ -1,0 +1,493 @@
+---
+interface TimelineEvent {
+  title: string;
+  org: string;
+  start: string; // YYYY-MM
+  end: string;   // YYYY-MM or "Present"
+  track: 'education' | 'experience' | 'awards';
+  color: string; // Tailwind class for bg
+  details?: string[];
+  link?: string;
+  depth?: number; // Manual indentation level: 0 (default) = no indent, 1+ = indented
+  textMarginTop?: number; // Optional top margin for text content in pixels
+}
+
+const events: TimelineEvent[] = [
+  // --- TRACK 1: EDUCATION ---
+  {
+    title: "PhD in Deep Learning",
+    org: "University of Münster",
+    start: "2025-12",
+    end: "Present",
+    track: "education",
+    color: "bg-indigo-600",
+    details: ["Advisor: Prof. Dr. Fabian Gieseke", "Focus: Efficient DL"],
+  },
+  {
+    title: "MSc Information Systems",
+    org: "University of Münster",
+    start: "2023-04",
+    end: "2025-11",
+    track: "education",
+    color: "bg-indigo-600",
+    details: ["Specialization: Data Science", "Grade: X.X"],
+  },
+  {
+    title: "Semester Abroad",
+    org: "Universidad Politécnica de Madrid",
+    start: "2024-09",
+    end: "2025-01",
+    track: "education",
+    color: "bg-blue-500", // Different shade to show it's nested/special
+    details: ["Erasmus+"],
+    depth: 1,
+  },
+  {
+    title: "BSc Information Systems",
+    org: "University of Münster",
+    start: "2019-10",
+    end: "2022-12",
+    track: "education",
+    color: "bg-indigo-600",
+    details: ["Grade: 1.1 (GPA 3.8/4.0)"],
+  },
+
+  // --- TRACK 2: EXPERIENCE ---
+  {
+    title: "Research Associate",
+    org: "MLDE Group",
+    start: "2025-12",
+    end: "Present",
+    track: "experience",
+    color: "bg-teal-600",
+    details: ["Transformer optimization"],
+  },
+  {
+    title: "Student Research Assistant",
+    org: "MLDE Group",
+    start: "2025-03",
+    end: "2025-11",
+    track: "experience",
+    color: "bg-teal-700",
+  },
+  {
+    title: "Student Research Assistant",
+    org: "MLDE Group",
+    start: "2022-10",
+    end: "2024-08",
+    track: "experience",
+    color: "bg-teal-700",
+    details: ["Co-authored papers", "Implemented models"],
+    textMarginTop: 120,
+  },
+  {
+    title: "Data Scientist Intern",
+    org: "CLAAS E-Systems",
+    start: "2025-04",
+    end: "2025-06",
+    track: "experience",
+    color: "bg-emerald-500", // Distinct for Industry
+    details: ["Geospatial pipeline", "PySpark", "Regression models"],
+    depth: 1,
+  },
+  {
+    title: "Tutor (Data Structures and Algorithms)",
+    org: "University of Münster",
+    start: "2024-04",
+    end: "2024-09",
+    track: "experience",
+    color: "bg-cyan-700",
+    depth: 1,
+  },
+  {
+    title: "Tutor (Data Structures and Algorithms)",
+    org: "University of Münster",
+    start: "2022-04",
+    end: "2022-09",
+    track: "experience",
+    color: "bg-cyan-700",
+  },
+  {
+    title: "Tutor (Data Structures and Algorithms)",
+    org: "University of Münster",
+    start: "2021-04",
+    end: "2021-09",
+    track: "experience",
+    color: "bg-cyan-700",
+  },
+
+  // --- TRACK 3: AWARDS / SCHOLARSHIPS ---
+  {
+    title: "Deutschlandstipendium",
+    org: "Scholarship",
+    start: "2021-10",
+    end: "2025-09",
+    track: "awards",
+    color: "bg-amber-600",
+    details: ["Merit-based scholarship"],
+  },
+  {
+    title: "Best Thesis Award",
+    org: "Applied CS 2023",
+    start: "2023-10",
+    end: "2023-11", // Make it 1 month tall
+    track: "awards",
+    color: "bg-amber-400",
+    depth: 1,
+  },
+];
+
+// 2. GRID CALCULATION LOGIC
+const START_YEAR = 2019;
+const START_MONTH = 10;
+const END_YEAR = 2026;
+const END_MONTH = 5;
+const MONTH_HEIGHT_PX = 25; // Height of each month row in pixels
+const DEPTH_INDENT = 8; // Indent per depth level in pixels
+
+// Helper to convert "YYYY-MM" to absolute month index
+const getMonthIndex = (dateStr: string) => {
+  if (dateStr === "Present") {
+     // Map "Present" to the very top (END_YEAR-END_MONTH)
+     return (END_YEAR - START_YEAR) * 12 + (END_MONTH - 1) - START_MONTH + 1;
+  }
+  const [y, m] = dateStr.split('-').map(Number);
+  return (y - START_YEAR) * 12 + (m - 1) - START_MONTH + 1;
+};
+
+const totalMonths = getMonthIndex(`${END_YEAR}-${END_MONTH}`);
+
+// Reverse the scale: High numbers (Recent) are at the top (Grid Row 1)
+// Grid Row = TotalMonths - MonthIndex
+const getGridRow = (dateStr: string) => {
+    const idx = getMonthIndex(dateStr);
+    // CSS Grid is 1-based.
+    // We want the LATEST event at Row 1.
+    // So if idx is high (recent), result should be low.
+    return totalMonths - idx + 1;
+};
+
+const sortedEvents = events.map(e => {
+    let startRow = getGridRow(e.end);
+    let endRow = getGridRow(e.start) + 1; // +1 to include the start month
+    
+    // Fix for single month events or inverted calc
+    if (startRow >= endRow) { 
+        endRow = startRow + 1; 
+    }
+    
+    return { ...e, gridRowStart: startRow, gridRowEnd: endRow, depth: e.depth || 0 };
+});
+
+// Generate Years for the Axis
+// Generate Axis Grid Items (Months & Years)
+// Iterate from Row 1 (Newest) to Row Total (Oldest)
+const axisItems = [];
+for (let r = 1; r <= totalMonths + 1; r++) {
+    const idx = totalMonths - r + 1;
+    // idx = (y - START) * 12 + (m - 1) - START_MONTH + 1
+    // => idx + START_MONTH - 1 = (y - START) * 12 + (m - 1)
+    const absMonth = idx + START_MONTH - 1;
+    
+    if (absMonth >= 0) {
+        const y = Math.floor(absMonth / 12) + START_YEAR;
+        const m = (absMonth % 12) + 1;
+        
+        axisItems.push({ row: r, year: y, month: m });
+    }
+}
+---
+
+<div class="relative w-full max-w-6xl mx-auto p-4 md:p-10" id="cv">
+  <h2 class="text-3xl font-mono font-bold text-center mb-12">
+    <span class="text-teal-400">./</span>timeline
+  </h2>
+
+  <!-- GRID CONTAINER -->
+  <!-- 
+     Mobile: Flex column (Stack)
+     Desktop: CSS Grid with 3 columns (Edu, Time, Work/Awards) 
+     Each row is approx 50px height represents 1 Month
+  -->
+<div
+  class="hidden md:grid gap-x-8 relative"
+  style={`grid-template-columns: 1fr 60px 1fr 1fr; grid-template-rows: repeat(${totalMonths}, ${MONTH_HEIGHT_PX}px);`}
+>
+  <!-- ===== 1) LANE HEADERS (row 1, span 4 cols) ===== -->
+  <div
+    class="col-span-1 flex items-center justify-center font-mono font-bold text-slate-300 sticky top-0 z-20 bg-slate-950/80 backdrop-blur py-4"
+    style="grid-column:1; grid-row:1;"
+  >
+    Education
+  </div>
+  <div
+    class="col-span-1 flex items-center justify-center font-mono font-bold text-slate-300 sticky top-0 z-20 bg-slate-950/80 backdrop-blur py-4"
+    style="grid-column:3; grid-row:1;"
+  >
+    Work Experience
+  </div>
+  <div
+    class="col-span-1 flex items-center justify-center font-mono font-bold text-slate-300 sticky top-0 z-20 bg-slate-950/80 backdrop-blur py-4"
+    style="grid-column:4; grid-row:1;"
+  >
+    Awards
+  </div>
+
+  <!-- ===== 2) YEAR & MONTH AXIS (column 2) ===== -->
+  {axisItems.map((item, index) => {
+    const isFirstMonthOfYear = item.month === 12 || item.row === 1;
+    const prevItem = index > 0 ? axisItems[index - 1] : null;
+    const isYearChange = prevItem && prevItem.year !== item.year;
+    
+    return (
+      <>
+        {/* Horizontal line between years */}
+        {isYearChange && (
+          <div
+            class="border-t border-slate-700/50"
+            style={`grid-column: 1 / -1; grid-row: ${item.row}; z-index: 0;`}
+          />
+        )}
+        
+        {/* Year and Month display */}
+        <div
+          class="flex items-center justify-center gap-2 font-mono text-slate-500 font-bold z-10"
+          style={`grid-column:2; grid-row:${item.row};`}
+        >
+          {/* Year label - only show on first month of year */}
+          {isFirstMonthOfYear && (
+            <span class="text-[11px] text-teal-400/80 leading-none min-w-[32px] text-right">{item.year}</span>
+          )}
+          {!isFirstMonthOfYear && (
+            <span class="min-w-[32px]"></span>
+          )}
+          
+          {/* Month label - always show */}
+          <span class="text-[10px] opacity-60 leading-none min-w-[16px]">{String(item.month).padStart(2, '0')}</span>
+        </div>
+      </>
+    );
+  })}
+
+    <!-- TRACK 1: EDUCATION (Left) -->
+    {sortedEvents.filter(e => e.track === 'education').map(e => {
+        const isPresent = e.end === 'Present';
+        const indent = e.depth * DEPTH_INDENT;
+        const zIndex = 10 + e.depth * 5; // Higher z-index for nested events
+        return (
+        <div 
+            class={`timeline-card group relative rounded-lg border border-slate-700/50 p-3 hover:z-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] ${e.color} bg-opacity-20 backdrop-blur-sm hover:bg-opacity-90 cursor-pointer`}
+            style={`grid-column: 1; grid-row: ${e.gridRowStart} / ${e.gridRowEnd}; margin-bottom: 2px; margin-left: ${indent}px; margin-right: ${-indent}px; z-index: ${zIndex}; ${isPresent ? 'mask-image: linear-gradient(to bottom, transparent, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%);' : ''}`}
+            data-title={e.title}
+            data-org={e.org}
+            data-start={e.start}
+            data-end={e.end}
+            data-color={e.color}
+            data-details={JSON.stringify(e.details || [])}
+        >
+            <div class={`flex flex-col h-full pointer-events-none ${isPresent ? 'justify-end pb-1' : 'justify-start pt-1'}`} style={e.textMarginTop && !isPresent ? `margin-top: ${e.textMarginTop}px;` : ''}>
+                <span class="text-xs font-mono opacity-70 mb-1">{e.start} - {e.end}</span>
+                <h3 class="font-bold text-slate-100 group-hover:text-white leading-tight">{e.title}</h3>
+                <p class="text-sm text-slate-300 group-hover:text-slate-100">{e.org}</p>
+            </div>
+        </div>
+    )})}
+
+    <!-- TRACK 2: EXPERIENCE (Right Middle) -->
+    {sortedEvents.filter(e => e.track === 'experience').map(e => {
+        const isPresent = e.end === 'Present';
+        const indent = e.depth * DEPTH_INDENT;
+        const zIndex = 10 + e.depth * 5;
+        return (
+        <div 
+            class={`timeline-card group relative rounded-lg border border-slate-700/50 p-3 hover:z-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] ${e.color} bg-opacity-20 backdrop-blur-sm hover:bg-opacity-90 cursor-pointer`}
+            style={`grid-column: 3; grid-row: ${e.gridRowStart} / ${e.gridRowEnd}; margin-bottom: 2px; margin-left: ${indent}px; margin-right: ${-indent}px; z-index: ${zIndex}; ${isPresent ? 'mask-image: linear-gradient(to bottom, transparent, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%);' : ''}`}
+            data-title={e.title}
+            data-org={e.org}
+            data-start={e.start}
+            data-end={e.end}
+            data-color={e.color}
+            data-details={JSON.stringify(e.details || [])}
+        >
+             <div class={`flex flex-col h-full pointer-events-none ${isPresent ? 'justify-end pb-1' : 'justify-start pt-1'}`} style={e.textMarginTop && !isPresent ? `margin-top: ${e.textMarginTop}px;` : ''}>
+                <span class="text-xs font-mono opacity-70 mb-1">{e.start} - {e.end}</span>
+                <h3 class="font-bold text-slate-100 group-hover:text-white leading-tight">{e.title}</h3>
+                <p class="text-sm text-slate-300 group-hover:text-slate-100">{e.org}</p>
+            </div>
+        </div>
+    )})}
+
+    <!-- TRACK 3: AWARDS (Right Edge) -->
+     {sortedEvents.filter(e => e.track === 'awards').map(e => {
+        const isPresent = e.end === 'Present';
+        const indent = e.depth * DEPTH_INDENT;
+        const zIndex = 10 + e.depth * 5;
+        return (
+        <div 
+            class={`timeline-card group relative rounded-lg border border-slate-700/50 p-3 hover:z-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] ${e.color} bg-opacity-20 backdrop-blur-sm hover:bg-opacity-90 cursor-pointer`}
+            style={`grid-column: 4; grid-row: ${e.gridRowStart} / ${e.gridRowEnd}; margin-bottom: 2px; margin-left: ${indent}px; margin-right: ${-indent}px; z-index: ${zIndex}; ${isPresent ? 'mask-image: linear-gradient(to bottom, transparent, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%);' : ''}`}
+            data-title={e.title}
+            data-org={e.org}
+            data-start={e.start}
+            data-end={e.end}
+            data-color={e.color}
+            data-details={JSON.stringify(e.details || [])}
+        >
+             <div class={`flex flex-col h-full pointer-events-none ${isPresent ? 'justify-end pb-1' : 'justify-start pt-1'}`} style={e.textMarginTop && !isPresent ? `margin-top: ${e.textMarginTop}px;` : ''}>
+                <h3 class="font-bold text-xs md:text-sm text-slate-100 group-hover:text-white leading-tight">{e.title}</h3>
+                <span class="text-[10px] font-mono opacity-70">{e.start.split('-')[0]} - {e.end === 'Present' ? 'Now' : e.end.split('-')[0]}</span>
+            </div>
+        </div>
+    )})}
+  </div>
+
+  <!-- MOBILE FALLBACK (Simple Stack) -->
+  <div class="md:hidden space-y-6 border-l-2 border-slate-800 ml-3 pl-6 relative">
+    {sortedEvents.sort((a,b) => a.gridRowStart - b.gridRowStart).map(e => (
+        <div 
+          class="relative timeline-card cursor-pointer"
+          data-title={e.title}
+          data-org={e.org}
+          data-start={e.start}
+          data-end={e.end}
+          data-color={e.color}
+          data-details={JSON.stringify(e.details || [])}
+        >
+            <!-- Dot on timeline -->
+            <div class={`absolute -left-[31px] top-2 w-4 h-4 rounded-full ${e.color.replace('bg-', 'bg-')}`}></div>
+            <div class={`p-4 rounded-lg bg-slate-900 border border-slate-800 ${e.color} bg-opacity-10 pointer-events-none`}>
+                <span class="text-xs font-mono text-teal-400">{e.start} - {e.end}</span>
+                <h3 class="font-bold text-slate-100 mt-1">{e.title}</h3>
+                <p class="text-sm text-slate-400">{e.org}</p>
+            </div>
+        </div>
+    ))}
+  </div>
+</div>
+
+<!-- MODAL COMPONENT -->
+<div id="modal-backdrop" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+    <div id="modal-content" class="relative w-full max-w-lg bg-slate-900 border border-slate-700 rounded-xl shadow-2xl transform transition-all duration-300 scale-95 opacity-0 overflow-hidden">
+       <!-- Color Header -->
+       <div id="modal-header-color" class="h-3 w-full bg-slate-700"></div>
+       
+       <button id="modal-close" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800/50 rounded-full p-1 transition-colors z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+       </button>
+       
+       <div class="p-6 pt-5">
+           <span id="modal-date" class="block text-xs font-mono text-teal-400 mb-2"></span>
+           <h3 id="modal-title" class="text-2xl font-bold text-white mb-1 leading-tight pr-8"></h3>
+           <p id="modal-org" class="text-lg text-slate-300 mb-6"></p>
+           
+           <div class="bg-black/20 rounded-lg p-4 border border-slate-800/50">
+               <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Key Details</h4>
+               <ul id="modal-details" class="space-y-2 text-sm text-slate-300 list-disc list-inside">
+                   <!-- Details injected here -->
+               </ul>
+               <p id="modal-no-details" class="hidden text-sm text-slate-500 italic">No additional details available.</p>
+           </div>
+       </div>
+    </div>
+</div>
+
+<script>
+    // Script to handle Modal Logic
+    const backdrop = document.getElementById('modal-backdrop');
+    const content = document.getElementById('modal-content');
+    const closeBtn = document.getElementById('modal-close');
+    const cards = document.querySelectorAll('.timeline-card');
+
+    // Content Elements
+    const mTitle = document.getElementById('modal-title');
+    const mOrg = document.getElementById('modal-org');
+    const mDate = document.getElementById('modal-date');
+    const mHeader = document.getElementById('modal-header-color');
+    const mList = document.getElementById('modal-details');
+    const mNoDetails = document.getElementById('modal-no-details');
+
+    const closeModal = () => {
+        if (!backdrop || !content) return;
+        
+        // Animate out
+        backdrop.classList.add('opacity-0');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            backdrop.classList.add('hidden');
+        }, 300);
+    };
+
+    const openModal = (data) => {
+        if (!backdrop || !content) return;
+
+        // Populate Data
+        mTitle!.innerText = data.title;
+        mOrg!.innerText = data.org;
+        mDate!.innerText = `${data.start} - ${data.end}`;
+        
+        // Colors
+        // Remove old bg classes (simple hack: remove all classes then add back base ones or just replace style)
+        // Since color is a tailwind class (bg-xxx), we can't easily just replace it without regex or known list.
+        // Easier: set style backgroundColor? No, tailwind classes.
+        // Let's reset classList for the header
+        mHeader!.className = `h-3 w-full ${data.color}`;
+
+        // Details
+        mList!.innerHTML = '';
+        const details = JSON.parse(data.details);
+        
+        if (details && details.length > 0) {
+            mList!.classList.remove('hidden');
+            mNoDetails!.classList.add('hidden');
+            details.forEach((d: string) => {
+                const li = document.createElement('li');
+                li.innerText = d;
+                mList!.appendChild(li);
+            });
+        } else {
+            mList!.classList.add('hidden');
+            mNoDetails!.classList.remove('hidden');
+        }
+
+        // Show
+        backdrop.classList.remove('hidden');
+        // Small delay to allow display:block to apply before opacity transition
+        requestAnimationFrame(() => {
+            backdrop.classList.remove('opacity-0');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        });
+    };
+
+    // Attach listeners
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+             // Extract data
+             const d = (card as HTMLElement).dataset;
+             const data = {
+                 title: d.title,
+                 org: d.org,
+                 start: d.start,
+                 end: d.end,
+                 color: d.color,
+                 details: d.details
+             };
+             // @ts-ignore
+             openModal(data);
+        });
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    
+    // Close on click outside
+    backdrop?.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeModal();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+</script>
