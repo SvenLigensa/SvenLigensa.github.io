@@ -5,13 +5,14 @@ interface Props {
 
 const { title } = Astro.props;
 import "../styles/global.css";
+import StickyFooter from "../components/StickyFooter.astro";
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Sven - Efficient ML Researcher" />
+    <meta name="description" content="Sven - Efficient DL" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
@@ -23,8 +24,9 @@ import "../styles/global.css";
     antialiased: Makes fonts look crisp
   -->
   <body
-    class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-teal-500 selection:text-white"
+    class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-teal-500 selection:text-white pb-20"
   >
     <slot />
+    <StickyFooter />
   </body>
 </html>

@@ -15,7 +15,7 @@ interface TimelineEvent {
 const events: TimelineEvent[] = [
     // --- TRACK 1: EDUCATION ---
     {
-        title: "PhD in Deep Learning",
+        title: "PhD (Deep Learning)",
         org: "University of Münster",
         start: "2025-12",
         end: "Present",
@@ -63,7 +63,7 @@ const events: TimelineEvent[] = [
         end: "Present",
         track: "experience",
         color: "bg-teal-600",
-        details: ["Transformer optimization"],
+        // details: [""],
     },
     {
         title: "Student Research Assistant",
@@ -470,7 +470,7 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
         noDetails: document.getElementById("modal-no-details"),
     };
 
-    function openModal(dataJson) {
+    function openModal(dataJson: string) {
         if (!backdrop || !content) return;
         const data = JSON.parse(dataJson);
 
