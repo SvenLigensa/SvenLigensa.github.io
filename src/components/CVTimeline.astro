@@ -2,7 +2,7 @@
 // --- 1. TYPE DEFINITIONS & DATA ---
 interface TimelineEvent {
     title: string;
-    org: string;
+    subtitle?: string;
     start: string; // YYYY-MM
     end: string; // YYYY-MM or "Present"
     track: "education" | "experience" | "awards";
@@ -12,166 +12,69 @@ interface TimelineEvent {
     textMarginTop?: number;
 }
 
-const events: TimelineEvent[] = [
-    // --- TRACK 1: EDUCATION ---
-    {
-        title: "PhD (Deep Learning)",
-        org: "University of Münster",
-        start: "2025-12",
-        end: "Present",
-        track: "education",
-        color: "bg-indigo-600",
-        details: ["Advisor: Prof. Dr. Fabian Gieseke", "Focus: Efficient DL"],
-    },
-    {
-        title: "MSc Information Systems",
-        org: "University of Münster",
-        start: "2023-04",
-        end: "2025-11",
-        track: "education",
-        color: "bg-indigo-600",
-        details: [
-            "Current grade: 1.0 (GPA 4.0/4.0)",
-            "Specialization: Data Science (ML, DL, Big Data, Data Management)",
-        ],
-    },
-    {
-        title: "Semester Abroad",
-        org: "Universidad Politécnica de Madrid",
-        start: "2024-09",
-        end: "2025-01",
-        track: "education",
-        color: "bg-blue-500",
-        details: ["Erasmus+"],
-        depth: 1,
-    },
-    {
-        title: "BSc Information Systems",
-        org: "University of Münster",
-        start: "2019-10",
-        end: "2022-12",
-        track: "education",
-        color: "bg-indigo-600",
-        details: ["Grade: 1.1 (GPA 3.8/4.0)"],
-    },
+import fs from "node:fs";
+import path from "node:path";
 
-    // --- TRACK 2: EXPERIENCE ---
-    {
-        title: "Research Associate",
-        org: "Machine Learning and Data Engineering (MLDE) group, University of Münster",
-        start: "2025-12",
-        end: "Present",
-        track: "experience",
-        color: "bg-teal-600",
-        // details: [""],
-    },
-    {
-        title: "Student Research Assistant",
-        org: "MLDE group",
-        start: "2025-03",
-        end: "2025-11",
-        track: "experience",
-        color: "bg-teal-700",
-        details: [
-            "Assisted the lecturer with designing and creating engaging slides for Data Structures and Algorithms.",
-            "Co-authored paper applying DL to satellite imagery.",
-        ],
-    },
-    {
-        title: "Student Research Assistant",
-        org: "MLDE group",
-        start: "2022-10",
-        end: "2024-08",
-        track: "experience",
-        color: "bg-teal-700",
-        details: [
-            "Proofread papers, created teaching material, programmed prototypes.",
-        ],
-        textMarginTop: 120,
-    },
-    {
-        title: "Data Scientist Intern",
-        org: "CLAAS E-Systems",
-        start: "2025-04",
-        end: "2025-06",
-        track: "experience",
-        color: "bg-emerald-500",
-        details: [
-            "Developed a pipeline to combine geospatial data with internal machine data and visualized results.",
-            "Trained various regression models on machine data using PySpark to reduce cost of sensors.",
-            "Contributed a classification model and dataset to internal AI toolkit and supported its adoption.",
-        ],
-        depth: 1,
-    },
-    {
-        title: "Tutor (Data Structures and Algorithms)",
-        org: "University of Münster",
-        start: "2024-04",
-        end: "2024-09",
-        track: "experience",
-        color: "bg-cyan-700",
-        depth: 1,
-        details: ["Graded exercises and conducted weekly tutorials."],
-    },
-    {
-        title: "Tutor (Data Structures and Algorithms)",
-        org: "University of Münster",
-        start: "2022-04",
-        end: "2022-09",
-        track: "experience",
-        color: "bg-cyan-700",
-        details: ["Graded exercises and conducted weekly tutorials."],
-    },
-    {
-        title: "Tutor (Data Structures and Algorithms)",
-        org: "University of Münster",
-        start: "2021-04",
-        end: "2021-09",
-        track: "experience",
-        color: "bg-cyan-700",
-        details: ["Graded exercises and conducted weekly tutorials."],
-    },
+const csvPath = path.join(process.cwd(), "src/data/timeline.csv");
+const csvFileContent = fs.readFileSync(csvPath, "utf-8");
 
-    // --- TRACK 3: AWARDS / SCHOLARSHIPS ---
-    {
-        title: 'Scholarship "Deutschlandstipendium"',
-        org: "University of Münster",
-        start: "2021-10",
-        end: "2025-09",
-        track: "awards",
-        color: "bg-amber-600",
-        details: [
-            "Merit-based scholarship",
-            'Please find further information <a href="https://www.deutschlandstipendium.de/deutschlandstipendium/de/services/english/english_node.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline">here</a>',
-        ],
-    },
-    {
-        title: "Best Thesis Award",
-        org: "Förderverein der Angewandten Informatik",
-        start: "2023-10",
-        end: "2023-11",
-        track: "awards",
-        color: "bg-amber-400",
-        details: [
-            "Best thesis in applied computer science at University of Münster in 2023",
-            'Please find further information <a href="https://www.uni-muenster.de/AngewandteInformatik/aktivitaeten/foerderpreis/preisverleihung2023.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline">here</a>',
-        ],
-        depth: 1,
-    },
-    {
-        title: "Best Bachelor's Degree",
-        org: "AlumniUM e.V.",
-        start: "2023-05",
-        end: "2023-06",
-        track: "awards",
-        color: "bg-amber-400",
-        details: [
-            "Best Bachelor's degree in winter term in Information Systems at University of Münster 2022/23",
-            'Please find further information <a href="https://alumnium.net/aktuelles/auszeichnung-der-besten-bachelor-und-masterabsolvent-innen-des-winters-1/" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline">here</a>',
-        ],
-        depth: 1,
-    },
-];
+// Simple CSV Parser handling quotes and pipes
+const parseCSV = (content: string): TimelineEvent[] => {
+    const lines = content.trim().split("\n");
+    // Skip headers (line 0)
+
+    return lines.slice(1).map((line) => {
+        // Simple CSV split logic: Handles quoted fields containing commas
+        // Does not handle escaped quotes inside quotes for simplicity (unless added)
+        // RegEx to match:
+        // 1. Quoted string: "..."
+        // 2. Simple string: ... (until comma)
+        const matches = [];
+        let inQuote = false;
+        let running = "";
+
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+
+            // Handle quotes
+            if (char === '"') {
+                // Check if it is an escaped quote ("")
+                if (inQuote && line[i + 1] === '"') {
+                    running += '"';
+                    i++; // Skip next quote
+                } else {
+                    inQuote = !inQuote; // Toggle quote state
+                }
+            }
+            // Handle comma separator (only if not in quotes)
+            else if (char === "," && !inQuote) {
+                matches.push(running);
+                running = "";
+            }
+            // Regular character
+            else {
+                running += char;
+            }
+        }
+        matches.push(running); // Push the last value
+
+        // Map matches to object properties
+        // Order: title,subtitle,start,end,track,color,details,depth,textMarginTop
+        return {
+            title: matches[0],
+            subtitle: matches[1] || undefined,
+            start: matches[2],
+            end: matches[3],
+            track: matches[4] as any,
+            color: matches[5],
+            details: matches[6] ? matches[6].split("|") : undefined,
+            depth: matches[7] ? parseInt(matches[7]) : undefined,
+            textMarginTop: matches[8] ? parseInt(matches[8]) : undefined,
+        };
+    });
+};
+
+const events: TimelineEvent[] = parseCSV(csvFileContent);
 
 // --- 2. CONFIGURATION & HELPERS ---
 const CONFIG = {
@@ -185,6 +88,8 @@ const CONFIG = {
 };
 
 // --- 3. DYNAMIC DATE CALCULATION ---
+const PRESENT_DATE = "2026-08";
+
 const dateToMonthIdx = (d: string) => {
     const [y, m] = d.split("-").map(Number);
     return y * 12 + m;
@@ -193,11 +98,11 @@ const dateToMonthIdx = (d: string) => {
 // Find global min/max to set grid boundaries automatically
 const allDates = events.flatMap((e) => [
     e.start,
-    e.end === "Present" ? new Date().toISOString().slice(0, 7) : e.end,
+    e.end === "Present" ? PRESENT_DATE : e.end,
 ]);
 
 const minMonthIdx = Math.min(...allDates.map(dateToMonthIdx)) - 2;
-const maxMonthIdx = Math.max(...allDates.map(dateToMonthIdx)) + 4;
+const maxMonthIdx = Math.max(...allDates.map(dateToMonthIdx));
 const totalGridRows = maxMonthIdx - minMonthIdx;
 
 const getGridRow = (dateStr: string) => {
@@ -311,6 +216,8 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
                 const indent = e.depth * CONFIG.depthIndent;
                 const zIndex = 10 + e.depth * 5;
 
+                const gradientHeight = 2 * CONFIG.monthHeight;
+
                 return (
                     <div
                         class={`timeline-card group relative rounded-lg border border-slate-700/50 px-3 py-1 hover:z-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] ${e.color} bg-opacity-20 backdrop-blur-sm hover:bg-opacity-90 cursor-pointer`}
@@ -320,38 +227,42 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
                 margin-left: ${indent}px; 
                 margin-right: -${indent}px; 
                 z-index: ${zIndex};
-                ${isPresent ? "mask-image: linear-gradient(to bottom, transparent, black 40%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%);" : ""}
+                ${isPresent ? `mask-image: linear-gradient(to bottom, transparent, black ${gradientHeight}px); -webkit-mask-image: linear-gradient(to bottom, transparent, black ${gradientHeight}px);` : ""}
             `}
                         data-json={JSON.stringify(e)}
                     >
                         <div
-                            class={`flex flex-col h-full pointer-events-none ${isPresent ? "justify-end pb-1" : "justify-start pt-1"}`}
+                            class="flex flex-col h-full pointer-events-none justify-start pt-1"
                             style={
                                 e.textMarginTop && !isPresent
                                     ? `margin-top: ${e.textMarginTop}px`
                                     : ""
                             }
                         >
+                            {isPresent && (
+                                <div style={`height: ${gradientHeight}px`} />
+                            )}
                             {e.track === "awards" ? (
                                 <>
                                     <h3 class="font-bold text-xs md:text-sm text-slate-100 group-hover:text-white leading-tight">
                                         {e.title}
                                     </h3>
-                                    <span class="text-[10px] font-mono opacity-70">
-                                        {e.start.split("-")[0]}
-                                    </span>
+                                    {e.subtitle && (
+                                        <p class="text-[10px] font-mono opacity-70 mt-0.5">
+                                            {e.subtitle}
+                                        </p>
+                                    )}
                                 </>
                             ) : (
                                 <>
-                                    <span class="text-xs font-mono opacity-70 mb-1">
-                                        {e.start} - {e.end}
-                                    </span>
                                     <h3 class="font-bold text-slate-100 group-hover:text-white leading-tight">
                                         {e.title}
                                     </h3>
-                                    <p class="text-sm text-slate-300 group-hover:text-slate-100">
-                                        {e.org}
-                                    </p>
+                                    {e.subtitle && (
+                                        <p class="text-sm text-slate-300 group-hover:text-slate-100">
+                                            {e.subtitle}
+                                        </p>
+                                    )}
                                 </>
                             )}
                         </div>
@@ -368,7 +279,7 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
                 .sort((a, b) => a.gridRowStart - b.gridRowStart)
                 .map((e) => (
                     <div
-                        class="relative timeline-card cursor-pointer"
+                        class="relative timeline-card cursor-pointer group"
                         data-json={JSON.stringify(e)}
                     >
                         <div
@@ -383,7 +294,11 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
                             <h3 class="font-bold text-slate-100 mt-1">
                                 {e.title}
                             </h3>
-                            <p class="text-sm text-slate-400">{e.org}</p>
+                            {e.subtitle && (
+                                <p class="text-sm text-slate-400">
+                                    {e.subtitle}
+                                </p>
+                            )}
                         </div>
                     </div>
                 ))
@@ -455,15 +370,29 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
     </div>
 </div>
 
+<!-- MOUSE FOLLOWER TOOLTIP -->
+<div
+    id="timeline-tooltip"
+    class="fixed z-50 pointer-events-none opacity-0 transition-opacity duration-150 ease-out hidden md:block"
+    style="left: 0; top: 0;"
+>
+    <div
+        class="bg-slate-950/90 backdrop-blur border border-slate-700/50 text-white text-xs font-mono px-3 py-1.5 rounded shadow-xl"
+    >
+        Click for more info
+    </div>
+</div>
+
 <script>
     const container = document.getElementById("cv");
     const backdrop = document.getElementById("modal-backdrop");
     const content = document.getElementById("modal-content");
     const closeBtn = document.getElementById("modal-close");
+    const tooltip = document.getElementById("timeline-tooltip");
 
     const els = {
         title: document.getElementById("modal-title"),
-        org: document.getElementById("modal-org"),
+        subtitle: document.getElementById("modal-org"),
         date: document.getElementById("modal-date"),
         header: document.getElementById("modal-header-color"),
         list: document.getElementById("modal-details"),
@@ -475,7 +404,7 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
         const data = JSON.parse(dataJson);
 
         els.title!.innerText = data.title;
-        els.org!.innerText = data.org;
+        els.subtitle!.innerText = data.subtitle || "";
         els.date!.innerText = `${data.start} - ${data.end}`;
         els.header!.className = `h-3 w-full ${data.color}`;
 
@@ -515,6 +444,29 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
         if (card && card instanceof HTMLElement && card.dataset.json) {
             openModal(card.dataset.json);
         }
+    });
+
+    // Tooltip Logic
+    const cards = document.querySelectorAll(".timeline-card");
+    cards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+            if (tooltip) {
+                tooltip.classList.remove("opacity-0");
+            }
+        });
+        card.addEventListener("mouseleave", () => {
+            if (tooltip) {
+                tooltip.classList.add("opacity-0");
+            }
+        });
+        card.addEventListener("mousemove", (e) => {
+            if (tooltip) {
+                // Add a small offset so it doesn't overlap the cursor
+                const x = (e as MouseEvent).clientX + 15;
+                const y = (e as MouseEvent).clientY - 15;
+                tooltip.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        });
     });
 
     closeBtn?.addEventListener("click", closeModal);
