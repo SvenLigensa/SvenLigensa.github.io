@@ -78,7 +78,7 @@ const events: TimelineEvent[] = parseCSV(csvFileContent);
 
 // --- 2. CONFIGURATION & HELPERS ---
 const CONFIG = {
-    monthHeight: 25,
+    monthHeight: 18,
     depthIndent: 8,
     tracks: [
         { id: "education", label: "Education", col: 1 },
@@ -114,10 +114,26 @@ const getGridRow = (dateStr: string) => {
 };
 
 // Pre-calculate layout data
+// Calculate minimum rows needed based on content (title only vs title + subtitle)
+// Estimated heights: padding (8px) + pt-1 (4px) + title (~20px) + subtitle (~18px if present)
+const titleOnlyHeight = 18; // ~32px for title-only entries
+const titleSubtitleHeight = 36; // ~50px for entries with subtitle
+
 const processedEvents = events.map((e) => {
     const startRow = getGridRow(e.end);
     let endRow = getGridRow(e.start) + 1;
     if (startRow >= endRow) endRow = startRow + 1;
+
+    // Calculate content-dependent minimum row span
+    const minHeight = e.subtitle ? titleSubtitleHeight : titleOnlyHeight;
+    const minRowSpan = Math.ceil(minHeight / CONFIG.monthHeight);
+
+    // Ensure the entry spans at least minRowSpan rows
+    const currentSpan = endRow - startRow;
+    if (currentSpan < minRowSpan) {
+        endRow = startRow + minRowSpan;
+    }
+
     return {
         ...e,
         gridRowStart: startRow,
@@ -220,7 +236,7 @@ const axisItems = Array.from({ length: totalGridRows }, (_, i) => {
 
                 return (
                     <div
-                        class={`timeline-card group relative rounded-lg border border-slate-700/50 px-3 py-1 hover:z-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] ${e.color} bg-opacity-20 backdrop-blur-sm hover:bg-opacity-90 cursor-pointer`}
+                        class={`timeline-card group relative rounded-lg border border-slate-700/50 px-3 py-1 min-h-fit hover:z-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] ${e.color} bg-opacity-20 backdrop-blur-sm hover:bg-opacity-90 cursor-pointer`}
                         style={`
                 grid-column: ${trackConfig.col}; 
                 grid-row: ${e.gridRowStart} / ${e.gridRowEnd}; 
