@@ -1,0 +1,28 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64" color="#000000">
+  <!-- White Background -->
+  <rect width="64" height="64" fill="#ffffff" />
+
+  <!-- Network Connections (Solid Gray) -->
+  <path 
+    d="M12 20L32 32L12 44M12 20L32 12M12 20L32 52M12 44L32 12M12 44L32 52M32 32L52 20M32 32L52 44M32 52L52 44M32 12L52 44M32 52L52 20M32 12L52 20" 
+    stroke="#999999" 
+    stroke-width="2" 
+/>
+
+  <!-- Network Nodes (Solid Gray) -->
+  <circle cx="12" cy="20" r="3" fill="#999999" />
+  <circle cx="12" cy="44" r="3" fill="#999999" />
+  <circle cx="32" cy="12" r="3" fill="#999999" />
+  <circle cx="32" cy="52" r="3" fill="#999999" />
+  <circle cx="52" cy="20" r="3" fill="#999999" />
+  <circle cx="52" cy="44" r="3" fill="#999999" />
+
+  <!-- Magnifying Glass (Main Color/Black) -->
+  <g stroke="currentColor" stroke-width="4">
+    <circle cx="32" cy="32" r="14" />
+    <path d="M43 43L56 56" stroke-linecap="round" />
+  </g>
+
+  <!-- The "Explained" Node (Inside the glass, Main Color/Black) -->
+  <circle cx="32" cy="32" r="4" fill="currentColor" />
+</svg>

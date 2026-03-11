@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sven Ligensa</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-name" href="#">Sven Ligensa</a>
+      <ul>
+        <li><a href="#projects">Papers &amp; Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#experience">Work</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+      </ul>
+      <!-- Mobile: active section button (shown only on mobile) -->
+      <button class="mobile-section-btn" id="mobile-section-btn" aria-haspopup="true" aria-expanded="false">
+        <span id="mobile-section-label">Papers &amp; Projects</span>
+        <svg class="mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <!-- Mobile: nav dropdown -->
+      <div class="mobile-nav-dropdown" id="mobile-nav-dropdown" aria-hidden="true">
+        <ul>
+          <li><a href="#projects">Papers &amp; Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#awards">Awards</a></li>
+          <li><a href="#experience">Work</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+        </ul>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="about" class="hero">
+      <h1>Sven Ligensa</h1>
+      <p class="tagline">PhD Researcher @ <a href="https://mlde-lab.github.io/" target="_blank" rel="noopener">MLDE group</a> at University of Münster</p>
+      <p class="bio">Working on <span class="emph">Explainable AI</span> to make powerful Deep Learning models more transparent.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Papers &amp; Projects</h2>
+
+      <div class="entry entry--clickable" data-modal="modal-master" role="button" tabindex="0" aria-haspopup="dialog">
+        <div class="entry-meta">
+          <span class="date">Nov 2025</span>
+        </div>
+        <div class="entry-body">
+          <h3>Efficient Vision Attention Mechanisms for Dense Prediction</h3>
+          <p class="institution">Master Thesis</p>
+        </div>
+      </div>
+
+      <div class="entry entry--clickable" data-modal="modal-bachelor" role="button" tabindex="0" aria-haspopup="dialog">
+        <div class="entry-meta">
+          <span class="date">Dec 2022</span>
+        </div>
+        <div class="entry-body">
+          <h3>Combining Deep Feature Extraction with Locality-Sensitive Hashing for Reverse Image Search</h3>
+          <p class="institution">Bachelor Thesis</p>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Dec 2025 - Present</span>
+        </div>
+        <div class="entry-body">
+          <h3>PhD in Deep Learning</h3>
+          <p class="institution">University of Münster</p>
+          <p>Advisor: Prof. Dr. Fabian Gieseke · Machine Learning and Data Engineering Group</p>
+        </div>
+        <div class="sub-entry-meta">
+          <span class="date">Feb 2026</span>
+        </div>
+        <div class="sub-entry-body">
+          <span class="sub-entry-title">MLSS Melbourne 2026</span>
+          <p class="institution">Machine Learning Summer School, organized by Maincode</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Apr 2023 - Nov 2025</span>
+        </div>
+        <div class="entry-body">
+          <h3>MSc in Information Systems <span class="grade">Grade: 1.0 (GPA 4.0/4.0)</span></h3>
+          <p class="institution">University of Münster</p>
+          <p>Specialization in Data Science (ML, DL, Big Data, Data Management) and Computer Science</p>
+        </div>
+        <div class="sub-entry-meta">
+          <span class="date">Sep 2024 - Jan 2025</span>
+        </div>
+        <div class="sub-entry-body">
+          <span class="sub-entry-title">Semester Abroad, Erasmus+</span>
+          <p class="institution">Universidad Politécnica de Madrid</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Oct 2019 - Dec 2022</span>
+        </div>
+        <div class="entry-body">
+          <h3>BSc in Information Systems <span class="grade">Grade: 1.1 (GPA 3.8/4.0)</span></h3>
+          <p class="institution">University of Münster</p>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="awards">
+      <h2>Awards &amp; Scholarships</h2>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Oct 2021 - Sep 2025</span>
+        </div>
+        <div class="entry-body">
+          <h3>Deutschlandstipendium Scholarship</h3>
+          <p class="institution">University of Münster</p>
+          <div class="entry-links"><a class="modal-btn" href="https://www.deutschlandstipendium.de/deutschlandstipendium/de/services/english/english_node.html" target="_blank" rel="noopener"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>More Information</a></div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Nov 2023</span>
+        </div>
+        <div class="entry-body">
+          <h3>Award for Best Thesis in Applied Computer Science (2023)</h3>
+          <p class="institution">University of Münster</p>
+          <div class="entry-links"><a class="modal-btn" href="https://www.uni-muenster.de/AngewandteInformatik/aktivitaeten/foerderpreis/preisverleihung2023.html" target="_blank" rel="noopener"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>More Information</a></div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Jun 2023</span>
+        </div>
+        <div class="entry-body">
+          <h3>Award for Best Bachelor's Degree (Winter Term 2022/23)</h3>
+          <p class="institution">University of Münster</p>
+          <div class="entry-links"><a class="modal-btn" href="https://alumnium.net/aktuelles/auszeichnung-der-besten-bachelor-und-masterabsolvent-innen-des-winters-1/" target="_blank" rel="noopener"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>More Information</a></div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="experience">
+      <h2>Work</h2>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Dec 2025 - Present</span>
+        </div>
+        <div class="entry-body">
+          <h3>Research Associate</h3>
+          <p class="institution">University of Münster · Machine Learning and Data Engineering Group</p>
+          <p>Conducting research on Explainable AI.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Mar 2025 - Nov 2025<br/>Oct 2022 - Aug 2024</span>
+        </div>
+        <div class="entry-body">
+          <h3>Student Research Assistant</h3>
+          <p class="institution">University of Münster · MLDE Group</p>
+          <p>Co-authored and proofread papers, implemented models, created teaching materials.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">Apr 2025 - Jun 2025</span>
+        </div>
+        <div class="entry-body">
+          <h3>Data Scientist Intern</h3>
+          <p class="institution">CLAAS E-Systems GmbH</p>
+          <ul>
+            <li>Developed a pipeline combining geospatial data with internal machine data.</li>
+            <li>Trained regression models on machine data using PySpark to reduce sensor costs.</li>
+            <li>Contributed a classification model and dataset to the internal AI toolkit.</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="teaching">
+      <h2>Teaching @ University of Münster</h2>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">ST 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3>Optimizing Electricity Trading</h3>
+          <div class="pill-row">
+            <span class="pill pill--project-seminar">Project Seminar</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">ST 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3>GeoAI Platforms</h3>
+          <div class="pill-row">
+            <span class="pill pill--project-seminar">Project Seminar</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">ST 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3>Computer Structures and Operating Systems</h3>
+          <div class="pill-row">
+            <span class="pill pill--lecture">Lecture</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">WT 2025/26</span>
+        </div>
+        <div class="entry-body">
+          <h3>Mining Massive Datasets</h3>
+          <div class="pill-row">
+            <span class="pill pill--lecture">Lecture</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">ST 2025</span>
+        </div>
+        <div class="entry-body">
+          <h3>Data Structures and Algorithms</h3>
+          <div class="pill-row">
+            <span class="pill pill--lecture">Lecture</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">ST 2024</span>
+        </div>
+        <div class="entry-body">
+          <h3>Data Structures and Algorithms</h3>
+          <div class="pill-row">
+            <span class="pill pill--tutorial">Tutorial</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">ST 2022</span>
+        </div>
+        <div class="entry-body">
+          <h3>Data Structures and Algorithms</h3>
+          <div class="pill-row">
+            <span class="pill pill--tutorial">Tutorial</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="date">ST 2021</span>
+        </div>
+        <div class="entry-body">
+          <h3>Data Structures and Algorithms</h3>
+          <div class="pill-row">
+            <span class="pill pill--tutorial">Tutorial</span>
+            <span class="pill pill--supportive">Supportive</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div class="dock" role="navigation" aria-label="Social links">
+    <a class="dock-item" href="https://github.com/svenligensa" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      <span>GitHub</span>
+    </a>
+    <a class="dock-item" href="https://www.linkedin.com/in/sven-ligensa" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      <span>LinkedIn</span>
+    </a>
+    <div class="dock-item dock-item--disabled" title="Coming soon" aria-disabled="true">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+      <span>Google Scholar</span>
+    </div>
+    <a class="dock-item dock-email" href="mailto:Sven.Ligensa@uni-muenster.de">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      <span>Email</span>
+    </a>
+  </div>
+
+  <!-- Modal: Master Thesis -->
+  <div id="modal-master" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-master-title">
+      <div class="modal-header">
+        <div>
+          <p class="modal-label">Master Thesis · University of Münster · Nov 2025</p>
+          <h2 class="modal-title" id="modal-master-title">Efficient Vision Attention Mechanisms for Dense Prediction</h2>
+        </div>
+        <button class="modal-close" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-actions">
+          <a href="https://uni-muenster.sciebo.de/s/RqpazaWcfipdPNi" class="modal-btn" target="_blank" rel="noopener"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>PDF</a>
+          <a href="https://github.com/SvenLigensa/efficient-vision-attention" class="modal-btn" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>Code</a>
+        </div>
+        <h3>Summary</h3>
+        <p>This work examines architectural choices for Vision Transformers to perform efficient pixel-wise regression. 
+Experiments study changing the attention mechanism, patch size, encoder design, decoder design, and gradient checkpointing.
+The variants are compared in terms of their runtime, perceptual quality, and quantitative performance.</p>
+        <h3>Further Information</h3>
+        <table class="modal-table">
+          <tr><td>Principal Supervisor</td><td>Prof. Fabian Gieseke</td></tr>
+          <tr><td>Supervisor</td><td>Jan Pauls</td></tr>
+          <tr><td>Grade</td><td>1.0</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Bachelor Thesis -->
+  <div id="modal-bachelor" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-bachelor-title">
+      <div class="modal-header">
+        <div>
+          <p class="modal-label">Bachelor Thesis · University of Münster · Dec 2022</p>
+          <h2 class="modal-title" id="modal-bachelor-title">Combining Deep Feature Extraction with Locality-Sensitive Hashing for Reverse Image Search</h2>
+        </div>
+        <button class="modal-close" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-actions">
+          <a href="https://uni-muenster.sciebo.de/s/x6Ef2N5s6dVNveM" class="modal-btn" target="_blank" rel="noopener"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>PDF</a>
+          <a href="https://github.com/SvenLigensa/RIS-with-DINO-and-LSH" class="modal-btn" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>Code</a>
+        </div>
+        <h3>Summary</h3>
+        <p>This work presents a system to perform fast reverse image search on hundreds thousands of input images.
+First, a Vision Transformer is trained with the self-DIstillation with NO labels (DINO) framework to produce vector embeddings.
+Then, Locality-Sensitive Hashing (LSH) is used to perform an approximate nearest neighbors search on the embeddings.</p>
+        <h3>Further Information</h3>
+        <table class="modal-table">
+          <tr><td>Principal Supervisor</td><td>Prof. Fabian Gieseke</td></tr>
+          <tr><td>Supervisor</td><td>Christian Lülf</td></tr>
+          <tr><td>Grade</td><td>1.0</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
