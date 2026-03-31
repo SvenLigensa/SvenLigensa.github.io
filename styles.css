@@ -582,6 +582,7 @@ section {
 
 .dock-item svg {
   flex-shrink: 0;
+  overflow: visible;
   opacity: 0.7;
   transition: opacity 0.15s;
 }
