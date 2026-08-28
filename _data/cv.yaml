@@ -1,0 +1,162 @@
+# Content for the site. Rendered by build.py into index.html.
+# ─── Profile ──────────────────────────────────────────────────────────────────
+profile:
+  name: Sven Ligensa
+  # tagline and bio are inserted as raw HTML (links, <span class="emph">).
+  tagline: 'PhD Researcher @ <a href="https://mlde-lab.github.io/" target="_blank" rel="noopener">MLDE group</a> at University of Münster'
+  bio: 'Working on the application of <span class="emph">Transformers</span> and <span class="emph">explainability</span> to the field of <span class="emph">medicine</span>.'
+  dock:
+    - label: GitHub
+      icon: dock-github
+      url: https://github.com/svenligensa
+    - label: LinkedIn
+      icon: linkedin
+      url: https://www.linkedin.com/in/sven-ligensa
+    - label: Google Scholar
+      icon: scholar
+      url: https://scholar.google.com/citations?user=VN0jgXcAAAAJ
+    - label: ORCID
+      icon: orcid
+      url: https://orcid.org/0009-0007-4653-2394
+    - label: Email
+      icon: email
+      url: mailto:sven.ligensa@uni-muenster.de
+      class: dock-email
+
+# ─── Sections ─────────────────────────────────────────────────────────────────
+# Order here is the order on the page AND in the nav (desktop + mobile).
+# `nav` is the nav label, `heading` the <h2>; they differ for some sections.
+# The section with `source: papers` is filled from _data/papers/*.md.
+
+sections:
+  - id: projects
+    nav: Papers & Projects
+    heading: Papers & Projects
+    source: papers
+
+  - id: education
+    nav: Education
+    heading: Education
+    entries:
+      - date: Dec 2025 - Present
+        title: PhD in Deep Learning
+        institution: University of Münster
+        description: "Advisor: Prof. Dr. Fabian Gieseke · Machine Learning and Data Engineering Group"
+        sub:
+          - date: Feb 2026
+            title: MLSS Melbourne 2026
+            institution: Machine Learning Summer School, organized by Maincode
+
+      - date: Apr 2023 - Nov 2025
+        title: MSc in Information Systems
+        grade: "Grade: 1.0 (GPA 4.0/4.0)"
+        institution: University of Münster
+        description: Specialization in Data Science (ML, DL, Big Data, Data Management) and Computer Science
+        sub:
+          - date: Sep 2024 - Jan 2025
+            title: Semester Abroad, Erasmus+
+            institution: Universidad Politécnica de Madrid
+
+      - date: Oct 2019 - Dec 2022
+        title: BSc in Information Systems
+        grade: "Grade: 1.1 (GPA 3.8/4.0)"
+        institution: University of Münster
+
+  - id: awards
+    nav: Awards
+    heading: Awards & Scholarships
+    entries:
+      - date: Aug 2026
+        title: Award for Best Master's Degree (Winter Term 2025/26)
+        institution: University of Münster
+        links:
+          - label: More Information
+            url: https://alumnium.net/aktuelles/auszeichnung-der-besten-bachelor-und-masterabsolvent-innen-des-winters-4/
+
+      - date: Oct 2021 - Sep 2025
+        title: Deutschlandstipendium Scholarship
+        institution: University of Münster
+        links:
+          - label: More Information
+            url: https://www.deutschlandstipendium.de/deutschlandstipendium/de/services/english/english_node.html
+
+      - date: Nov 2023
+        title: Award for Best Thesis in Applied Computer Science (2023)
+        institution: University of Münster
+        links:
+          - label: More Information
+            url: https://www.uni-muenster.de/AngewandteInformatik/aktivitaeten/foerderpreis/preisverleihung2023.html
+
+      - date: Jun 2023
+        title: Award for Best Bachelor's Degree (Winter Term 2022/23)
+        institution: University of Münster
+        links:
+          - label: More Information
+            url: https://alumnium.net/aktuelles/auszeichnung-der-besten-bachelor-und-masterabsolvent-innen-des-winters-1/
+
+  - id: experience
+    nav: Work
+    heading: Work
+    entries:
+      - date: Dec 2025 - Present
+        title: Research Associate
+        institution: University of Münster · Machine Learning and Data Engineering Group
+        description: Conducting research on Transformers and Explainable AI.
+
+      # A list of dates is joined with <br/>.
+      - date: [Mar 2025 - Nov 2025, Oct 2022 - Aug 2024]
+        title: Student Research Assistant
+        institution: University of Münster · MLDE Group
+        description: Co-authored and proofread papers, implemented models, created teaching materials.
+
+      - date: Apr 2025 - Jun 2025
+        title: Data Scientist Intern
+        institution: CLAAS E-Systems GmbH
+        bullets:
+          - Developed a pipeline combining geospatial data with internal machine data.
+          - Trained regression models on machine data using PySpark to reduce sensor costs.
+          - Contributed a classification model and dataset to the internal AI toolkit.
+
+  - id: teaching
+    nav: Teaching
+    heading: Teaching @ University of Münster
+    # Show this many entries; the rest sit behind a "Show more" toggle.
+    collapseAfter: 4
+    # Each pill label is slugified into its modifier class,
+    # e.g. Project Seminar -> pill--project-seminar.
+    entries:
+      - date: WT 2026/27
+        title: Mining Massive Datasets
+        pills: [Lecture, Supportive]
+
+      - date: WT 2026/27
+        title: AIlaborate
+        pills: [Project Seminar, Supportive]
+
+      - date: ST 2026
+        title: Deep Learning
+        pills: [Lecture, Supportive]
+
+      - date: ST 2026
+        title: GeoAI Platforms
+        pills: [Project Seminar, Supportive]
+
+      - date: WT 2025/26
+        title: Mining Massive Datasets
+        pills: [Lecture, Supportive]
+
+      - date: ST 2025
+        title: Data Structures and Algorithms
+        pills: [Lecture, Supportive]
+
+      - date: ST 2024
+        title: Data Structures and Algorithms
+        pills: [Tutorial, Supportive]
+
+      - date: ST 2022
+        title: Data Structures and Algorithms
+        pills: [Tutorial, Supportive]
+
+      - date: ST 2021
+        title: Data Structures and Algorithms
+        pills: [Tutorial, Supportive]

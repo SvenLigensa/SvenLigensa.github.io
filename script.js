@@ -51,6 +51,19 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// ─── Show more ───────────────────────────────────────────────────────────────
+
+document.querySelectorAll('.show-more').forEach(button => {
+  const extra = document.getElementById(button.getAttribute('aria-controls'));
+  const label = button.querySelector('.show-more-label');
+  button.addEventListener('click', () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!expanded));
+    extra.hidden = expanded;
+    label.textContent = expanded ? button.dataset.more : button.dataset.less;
+  });
+});
+
 // ─── Active nav link on scroll ────────────────────────────────────────────────
 
 const sections = document.querySelectorAll('main section[id]');
